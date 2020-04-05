@@ -30,9 +30,37 @@ function myinit(){
 		
 		total_price=(Math.pow(diameter*Math.pow(10,diameter_unit),2)/4*PI*(length*Math.pow(10,length_unit)))*sweight*quantity*price*Math.pow(10,price_unit);
 		
-		if (isNaN(weight)) weight=null;
-		if (isNaN(total_weight)) total_weight=null;
-		if (isNaN(total_price)) total_price=null;
+		if (isNaN(weight)) {
+			weight=null;
+			$("#weight_value").addClass("bg-warning");
+			$("#weight_value").removeClass("bg-success");
+			$("#weight_value").removeClass("text-white");
+		} else {
+			$("#weight_value").removeClass("bg-warning");
+			$("#weight_value").addClass("bg-success");
+			$("#weight_value").addClass("text-white");
+		}
+		
+		if (isNaN(total_weight)) {
+			total_weight=null;
+			$("#total_weight_value").addClass("bg-warning");
+			$("#total_weight_value").removeClass("bg-success");
+			$("#total_weight_value").removeClass("text-white");
+		} else {
+			$("#total_weight_value").removeClass("bg-warning");
+			$("#total_weight_value").addClass("bg-success");
+			$("#total_weight_value").addClass("text-white");
+		}
+		if (isNaN(total_price)) {
+			total_price=null;
+			$("#total_price_value").addClass("bg-warning");
+			$("#total_price_value").removeClass("bg-success");
+			$("#total_price_value").removeClass("text-white");
+		} else {
+			$("#total_price_value").removeClass("bg-warning");
+			$("#total_price_value").addClass("bg-success");
+			$("#total_price_value").addClass("text-white");
+		}
 		
 		$("#weight_value").val(weight);
 		$("#total_weight_value").val(total_weight);
