@@ -1,1 +1,150 @@
-Hello World 
+<DOCTYPE! html>
+<html lang="en">
+	<head>
+		<title>Metal Calculator</title>
+		<meta charset="utf-8">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="./js/main.js"></script>
+		<style>
+			.rown {
+				margin-top: 1rem;
+			}
+			.container {
+				padding-top: 15px;
+				padding-bottom: 30px;
+			}
+			hr {
+				height: 2px;
+				background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-6">
+					<select class="form-control" id="metal_material">
+						<option value="2.7">Aluminium</option>
+						<option value="1.85">Berylium</option>
+					</select>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control" id="metal_material_value" readonly>
+				</div>
+				<div class="col-2">
+					<label>g/cm3</label>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col">
+					<img src="./img/round_bar.jpg" class="d-block mx-auto" alt="round bar" height="200px">
+				</div>
+			</div>
+			<!-- meter -->
+			<hr>
+			<div class="row">
+				<div class="col-4">
+					<label>Đường kính</label>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control" id="diameter_value">
+				</div>
+				<div class="col-4">
+					<select class="form-control" id="diameter_unit">
+						<option>m</option>
+						<option>cm</option>
+						<option selected>mm</option>
+					</select>
+				</div>
+			</div>
+			<div class="row rown">
+				<div class="col-4">
+					<label>Độ dài</label>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control" id="length_value">
+				</div>
+				<div class="col-4">
+					<select class="form-control" id="length_unit">
+						<option>m</option>
+						<option>cm</option>
+						<option selected>mm</option>
+					</select>
+				</div>
+			</div>
+			<!-- kilogram -->
+			<hr>
+			<div class="row">
+				<div class="col-4">
+					<label>Số lượng</label>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control" id="quantity_value">
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control" readonly value="cái">
+				</div>
+			</div>
+			<div class="row rown">
+				<div class="col-4">
+					<label>Giá cả</label>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control" id="price_value">
+				</div>
+				<div class="col-4">
+					<select class="form-control" id="price_unit">
+						<option selected>/kg</option>
+						<option>/g</option>
+					</select>
+				</div>
+			</div>
+			<!-- kilogram -->
+			<hr>
+			<div class="row">
+				<div class="col-4">
+					<label>Khối lượng (1 cái)</label>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control bg-warning " id="weight_value" readonly>
+				</div>
+				<div class="col-4">
+					<select class="form-control" id="weight_unit">
+						<option selected>kg</option>
+						<option>g</option>
+					</select>
+				</div>
+			</div>
+			<div class="row rown">
+				<div class="col-4">
+					<label>Tổng khối lượng</label>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control bg-warning " id="total_weight_value" readonly>
+				</div>
+				<div class="col-4">
+					<select class="form-control" id="total_weight_unit">
+						<option selected>kg</option>
+						<option>g</option>
+					</select>
+				</div>
+			</div>
+			<div class="row rown">
+				<div class="col-4">
+					<label>Tổng giá cả</label>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control bg-warning " id="total_price_value" readonly>
+				</div>
+				<div class="col-4">
+					<input type="text" class="form-control" readonly>
+				</div>
+			</div>
+			<hr style="height:30px;">
+		</div>
+	</body>
+</html>
