@@ -1,164 +1,69 @@
-<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Metal Calculator</title>
-		
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-		<script src="./js/main.js"></script>
-		<style>
-			.rown {
-				margin-top: 1rem;
+    <head>
+        <title>Talk To Me</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+        
+        <style>
+            body, html {
+				height: 100%;
+            }
+            .bg {
+				background-image: url(bg.jpg);
+				height: 100%;
+				transform: rotate(180deg);
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				position: relative;
+            }
+            .mid {
+				height: 100%;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				position: absolute;
+				top: 0;
+				left: 0;
+            }
+            h1 {
+				font-family: monospace;
+				color: darkgrey;
+				font-size: 6rem;
+				text-align: center;
+				margin-bottom: 1rem;
+            }
+			form {
+				width: 40%;
+				text-align: center;
+			}	
+			form div * {
+				width: 100%;
+				margin-bottom: 0.5rem;
 			}
-			.container {
-				padding-top: 15px;
-				padding-bottom: 15px;
-			}
-			hr {
-				height: 2px;
-				background-color: green;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<h1>Metal Calculator WebApp</h1>
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col-5">
-					<select class="form-control" id="metal_material">
-						<option value="2.7">Aluminium</option>
-						<option value="1.85">Berylium</option>
-					</select>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control" id="metal_material_value" readonly>
-				</div>
-				<div class="col-3">
-					<label>g/cm3</label>
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col">
-					<img src="./img/round_bar.jpg" class="d-block mx-auto" alt="round bar" height="200">
-				</div>
-			</div>
-			<!-- meter -->
-			<hr>
-			<div class="row">
-				<div class="col-4">
-					<label>Đường kính</label>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control" id="diameter_value">
-				</div>
-				<div class="col-4">
-					<select class="form-control" id="diameter_unit">
-						<option>m</option>
-						<option>cm</option>
-						<option selected>mm</option>
-					</select>
-				</div>
-			</div>
-			<div class="row rown">
-				<div class="col-4">
-					<label>Độ dài</label>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control" id="length_value">
-				</div>
-				<div class="col-4">
-					<select class="form-control" id="length_unit">
-						<option>m</option>
-						<option>cm</option>
-						<option selected>mm</option>
-					</select>
-				</div>
-			</div>
-			<!-- kilogram -->
-			<hr>
-			<div class="row">
-				<div class="col-4">
-					<label>Số lượng</label>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control" id="quantity_value">
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control" readonly value="cái">
-				</div>
-			</div>
-			<div class="row rown">
-				<div class="col-4">
-					<label>Giá cả</label>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control" id="price_value">
-				</div>
-				<div class="col-4">
-					<select class="form-control" id="price_unit">
-						<option selected>/kg</option>
-						<option>/g</option>
-					</select>
-				</div>
-			</div>
-			<!-- kilogram -->
-			<hr>
-			<div class="row">
-				<div class="col-4">
-					<label>Khối lượng (1 cái)</label>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control bg-warning " id="weight_value" readonly>
-				</div>
-				<div class="col-4">
-					<select class="form-control" id="weight_unit">
-						<option selected>kg</option>
-						<option>g</option>
-					</select>
-				</div>
-			</div>
-			<div class="row rown">
-				<div class="col-4">
-					<label>Tổng khối lượng</label>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control bg-warning " id="total_weight_value" readonly>
-				</div>
-				<div class="col-4">
-					<select class="form-control" id="total_weight_unit">
-						<option selected>kg</option>
-						<option>g</option>
-					</select>
-				</div>
-			</div>
-			<div class="row rown">
-				<div class="col-4">
-					<label>Tổng giá cả</label>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control bg-warning " id="total_price_value" readonly>
-				</div>
-				<div class="col-4">
-					<input type="text" class="form-control" readonly>
-				</div>
-			</div>
-			<hr style="height:30px;">
-			<div class="row">
-				<div class="col text-center">
-					<span>Copyright © 2020, <a href="mailto:nguyenduy4321@gmail.com">nguyenduy4321@gmail.com</a>.</span>
-				</div>
-			</div>
-		</div>
-	</body>
+        </style>
+    </head>
+    <body>
+        <div class="bg"></div>
+        <div class="mid">
+            <h1>Talk to Me</h1>
+            <form id="act">
+                <div>
+                    <input type="text" name="anonymous_name" placeholder="Any name here"/>
+                </div>
+                <div>
+                    <textarea type="text" name="talk" rows="4" placeholder="Any talk here"></textarea>
+                </div>
+				<button type="button" id="submit-form">Send it</button>
+            </form>
+        </div>
+		<script src="talktome.js"></script>
+    </body>
 </html>
