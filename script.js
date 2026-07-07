@@ -94,11 +94,7 @@ async function init() {
             const hovered = Query.point(bodiesWithText, mousePosition);
             if (hovered.length > 0) {
                 let targetUrl = hovered[0].plugin.url;
-                let newWindow = window.open(targetUrl, '_blank');
-                // Fallback cho Safari iOS chặn popup
-                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-                    window.location.href = targetUrl;
-                }
+                window.location.href = targetUrl;
             }
         }
         lastTapTime = currentTime;
@@ -334,7 +330,7 @@ async function init() {
         const mousePosition = mouse.position;
         const hovered = Query.point(bodiesWithText, mousePosition);
         
-        if (hovered.length > 0) {
+        if (hovered.length > 0 && !isMobile) {
             currentHoveredBody = hovered[0];
             document.body.style.cursor = 'pointer';
         } else {
