@@ -233,7 +233,7 @@ async function init() {
         ctx.font = `bold ${FONT_SIZE}px "Segoe UI", sans-serif`;
         
         const width = ctx.measureText(repo.name).width + 10; 
-        const height = 30; 
+        const height = FONT_SIZE * 1.5; 
         
         const x = Math.random() * (window.innerWidth - width) + width / 2;
         const y = -100; 
@@ -436,11 +436,13 @@ async function init() {
             ctx.translate(body.position.x, body.position.y);
             ctx.rotate(body.angle);
             
+            let yOffset = -body.plugin.height * 0.25;
+
             // Vẽ lớp cơ bản (Xám, không phát sáng)
             ctx.shadowColor = 'transparent';
             ctx.shadowBlur = 0;
             ctx.fillStyle = '#dcdde1';
-            ctx.fillText(body.plugin.text, 0, -7.5);
+            ctx.fillText(body.plugin.text, 0, yOffset);
             
             // Vẽ đè lớp Glow (tàng hình dần theo glowOpacity)
             if (glowOpacity > 0) {
@@ -449,7 +451,7 @@ async function init() {
                     ctx.shadowBlur = 25 * glowOpacity;
                 }
                 ctx.fillStyle = `rgba(255, 255, 255, ${glowOpacity})`;
-                ctx.fillText(body.plugin.text, 0, -7.5);
+                ctx.fillText(body.plugin.text, 0, yOffset);
             }
             
             ctx.rotate(-body.angle);
