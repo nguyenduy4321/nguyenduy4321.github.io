@@ -1,137 +1,14 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mở Hộp Quà Bất Ngờ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 40px;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 32px;
-      color: #2c3e50;
-      margin-bottom: 30px;
-    }
-
-    #giftBox {
-      width: 150px;
-      height: 150px;
-      margin: 40px auto;
-      background: url('https://cdn-icons-png.flaticon.com/512/254/254061.png') no-repeat center center;
-      background-size: contain;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    #giftBox.opened {
-      animation: shake 0.6s ease-in-out;
-    }
-
-    @keyframes shake {
-      0% { transform: rotate(0); }
-      20% { transform: rotate(-10deg); }
-      40% { transform: rotate(10deg); }
-      60% { transform: rotate(-10deg); }
-      80% { transform: rotate(10deg); }
-      100% { transform: rotate(0); }
-    }
-
-    #result {
-      font-size: 24px;
-      font-weight: 600;
-      margin-top: 30px;
-      color: #16a34a;
-      min-height: 30px;
-    }
-
-    #history {
-      margin-top: 40px;
-      font-size: 16px;
-    }
-
-    .history-item {
-      background: #fff;
-      padding: 10px;
-      margin: 5px auto;
-      max-width: 300px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyen Duy Projects</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎁 Mở Hộp Quà Bất Ngờ 🎁</h1>
-  <div id="giftBox" title="Click để mở quà!"></div>
-  <audio id="ding" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7a03076c17.mp3" preload="auto"></audio>
-  <div id="result"></div>
-  <div id="history"></div>
-
-  <script>
-    let options = [
-      "Ngã ba Đồng Lộc", "Nhà tù Côn Đảo", "Thánh địa Mỹ Sơn", "Lăng Chủ Tịch", "Lăng Khải Định",
-      "Cố đô Huế", "Chợ nổi Cái Răng", "Nhà mồ Ba Trúc", "Thác Bản Dốc", "Văn miếu Quốc Tử Giám",
-      "Phố cổ Hội An", "Địa đạo Củ Chi", "Núi Yên Tử", "Côn Sơn Kiếp Bạc", "Đền Hùng",
-      "Vạn lý trường thành", "Taj Mahal", "Potala Palace", "Pink Mosque", "Nhà hát Con Sò", "Melaka"
-    ];
-
-    const rareItems = ["Vạn lý trường thành", "Taj Mahal", "Potala Palace", "Pink Mosque", "Melaka"];
-    let weights = options.map(opt => rareItems.includes(opt) ? 1 : 20);
-
-    const box = document.getElementById('giftBox');
-    const result = document.getElementById('result');
-    const history = document.getElementById('history');
-    const audio = document.getElementById('ding');
-
-    function drawHistory(list) {
-      history.innerHTML = '<h3>Lịch sử phần thưởng:</h3>' +
-        list.map(name => `<div class="history-item">🎉 ${name}</div>`).join('');
-    }
-
-    function weightedRandomIndex(weights) {
-      const total = weights.reduce((a, b) => a + b, 0);
-      const r = Math.random() * total;
-      let acc = 0;
-      for (let i = 0; i < weights.length; i++) {
-        acc += weights[i];
-        if (r < acc) return i;
-      }
-      return weights.length - 1;
-    }
-
-    let opened = [];
-
-    box.addEventListener('click', () => {
-      if (options.length === 0) {
-        result.innerText = "🎉 Đã mở hết mọi hộp quà!";
-        return;
-      }
-
-      box.classList.add('opened');
-
-      setTimeout(() => {
-        box.classList.remove('opened');
-
-        const index = weightedRandomIndex(weights);
-        const selected = options[index];
-
-        result.innerText = `🎉 Bạn nhận được: ${selected}`;
-        audio.currentTime = 0;
-        audio.play();
-
-        opened.unshift(selected);
-        drawHistory(opened);
-
-        options.splice(index, 1);
-        weights.splice(index, 1);
-      }, 600);
-    });
-  </script>
+    <div id="bg-text"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

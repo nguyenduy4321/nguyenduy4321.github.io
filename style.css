@@ -1,0 +1,35 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%); /* Cinematic Space Theme */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+    font-size: 5vw;
+    font-weight: 300; /* Cinematic mỏng và tinh tế */
+    letter-spacing: 3px; /* Cinematic text spacing */
+    color: rgba(255, 255, 255, 0.6); /* Đọc rõ ràng trên nền tối */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Hiệu ứng sáng mờ */
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    word-wrap: break-word;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10; /* Nằm trên lớp chữ chạy */
+}
