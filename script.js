@@ -30,6 +30,11 @@ async function init() {
     const engine = Engine.create();
     const world = engine.world;
 
+    const isMobile = window.innerWidth <= 768;
+    const FONT_SIZE = isMobile ? 16 : 20;
+    const STAR_COUNT = isMobile ? 40 : 200;
+    const MAX_BODIES = isMobile ? 35 : 120;
+
     const render = Render.create({
         element: document.body,
         engine: engine,
@@ -37,7 +42,8 @@ async function init() {
             width: window.innerWidth,
             height: window.innerHeight,
             wireframes: false,
-            background: 'transparent' 
+            background: 'transparent',
+            pixelRatio: 1 // Ép pixel ratio = 1 để chống giật lag trên máy cấu hình yếu/màn hình DPI cao
         }
     });
 
@@ -93,8 +99,6 @@ async function init() {
     let fadeStartTime = 0;
     const FADE_DURATION = 10000; // 10 giây
     
-    const FONT_SIZE = 20;
-
     // --- GAME STATE ---
     let currentHue = null;
     let glowingColor = '#00f3ff'; 
@@ -103,7 +107,7 @@ async function init() {
     let currentGravity = 1; 
     let shakeAmount = 0;
     
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < STAR_COUNT; i++) {
         warpStars.push({
             x: (Math.random() - 0.5) * window.innerWidth * 2,
             y: (Math.random() - 0.5) * window.innerHeight * 2,
@@ -215,6 +219,12 @@ async function init() {
 
     function spawnWord() {
         if (repoIndex >= repos.length) return;
+
+        // Tối ưu hóa: Không spawn thêm nếu đã có quá nhiều chữ (đặc biệt trên mobile máy yếu)
+        if (bodiesWithText.length >= MAX_BODIES) {
+            setTimeout(spawnWord, 1500); // Tạm nghỉ 1.5s rồi thử lại
+            return;
+        }
 
         const repo = repos[repoIndex];
         repoIndex++; 
