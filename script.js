@@ -232,7 +232,7 @@ async function init() {
         const ctx = render.context;
         ctx.font = `bold ${FONT_SIZE}px "Segoe UI", sans-serif`;
         
-        const paddingX = FONT_SIZE * 0.8;
+        const paddingX = FONT_SIZE * 0.4;
         const paddingY = FONT_SIZE * 1.2;
         const width = ctx.measureText(repo.name).width + paddingX; 
         const height = paddingY; 
@@ -244,14 +244,12 @@ async function init() {
             restitution: 0.2, 
             friction: 0.8,    
             frictionAir: 0.02, 
-            chamfer: { radius: height * 0.4 }, // Bo tròn góc để tránh các chữ bị kẹt góc tạo ra khoảng trống ảo
+            chamfer: { radius: height * 0.4 }, 
             render: { fillStyle: 'transparent', strokeStyle: 'transparent', lineWidth: 0 }
         };
 
         const body = Bodies.rectangle(x, y, width, height, bodyOptions);
         
-        Body.setCentre(body, { x: 0, y: height * 0.25 }, true);
-
         body.plugin = {
             text: repo.name,
             url: repo.url,
@@ -439,13 +437,11 @@ async function init() {
             ctx.translate(body.position.x, body.position.y);
             ctx.rotate(body.angle);
             
-            let yOffset = -body.plugin.height * 0.25;
-
             // Vẽ lớp cơ bản (Xám, không phát sáng)
             ctx.shadowColor = 'transparent';
             ctx.shadowBlur = 0;
             ctx.fillStyle = '#dcdde1';
-            ctx.fillText(body.plugin.text, 0, yOffset);
+            ctx.fillText(body.plugin.text, 0, 0); // Vẽ ngay tâm (0,0) vì đã bỏ setCentre
             
             // Vẽ đè lớp Glow (tàng hình dần theo glowOpacity)
             if (glowOpacity > 0) {
@@ -454,7 +450,7 @@ async function init() {
                     ctx.shadowBlur = 25 * glowOpacity;
                 }
                 ctx.fillStyle = `rgba(255, 255, 255, ${glowOpacity})`;
-                ctx.fillText(body.plugin.text, 0, yOffset);
+                ctx.fillText(body.plugin.text, 0, 0);
             }
             
             ctx.rotate(-body.angle);
