@@ -31,7 +31,7 @@ async function init() {
     const world = engine.world;
 
     const isMobile = window.innerWidth <= 768;
-    const FONT_SIZE = isMobile ? 16 : 20;
+    const FONT_SIZE = isMobile ? 12 : 20;
     const STAR_COUNT = isMobile ? 40 : 200;
     const MAX_BODIES = isMobile ? 35 : 120;
 
@@ -380,8 +380,10 @@ async function init() {
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
             
-            ctx.shadowColor = glowingColor;
-            ctx.shadowBlur = 15;
+            if (!isMobile) {
+                ctx.shadowColor = glowingColor;
+                ctx.shadowBlur = 15;
+            }
             
             for(let star of warpStars) {
                 star.z -= 30; 
@@ -442,8 +444,10 @@ async function init() {
             
             // Vẽ đè lớp Glow (tàng hình dần theo glowOpacity)
             if (glowOpacity > 0) {
-                ctx.shadowColor = `hsla(${currentHue}, 100%, 60%, ${glowOpacity})`;
-                ctx.shadowBlur = 25 * glowOpacity;
+                if (!isMobile) {
+                    ctx.shadowColor = `hsla(${currentHue}, 100%, 60%, ${glowOpacity})`;
+                    ctx.shadowBlur = 25 * glowOpacity;
+                }
                 ctx.fillStyle = `rgba(255, 255, 255, ${glowOpacity})`;
                 ctx.fillText(body.plugin.text, 0, -7.5);
             }
