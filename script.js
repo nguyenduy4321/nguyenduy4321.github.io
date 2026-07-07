@@ -93,7 +93,12 @@ async function init() {
             const mousePosition = mouse.position;
             const hovered = Query.point(bodiesWithText, mousePosition);
             if (hovered.length > 0) {
-                window.open(hovered[0].plugin.url, '_blank');
+                let targetUrl = hovered[0].plugin.url;
+                let newWindow = window.open(targetUrl, '_blank');
+                // Fallback cho Safari iOS chặn popup
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    window.location.href = targetUrl;
+                }
             }
         }
         lastTapTime = currentTime;
@@ -458,8 +463,9 @@ async function init() {
             
             // Vẽ đè lớp Glow (tàng hình dần theo glowOpacity)
             if (glowOpacity > 0) {
-                ctx.shadowColor = `hsla(${currentHue}, 100%, 60%, ${glowOpacity})`;
-                ctx.shadowBlur = (isMobile ? 40 : 25) * glowOpacity;
+                // Tăng độ sáng (lightness) lên 75% thay vì 60% để chữ nổi bật hơn
+                ctx.shadowColor = `hsla(${currentHue}, 100%, 75%, ${glowOpacity})`;
+                ctx.shadowBlur = 25 * glowOpacity;
                 ctx.fillStyle = `rgba(255, 255, 255, ${glowOpacity})`;
                 ctx.fillText(body.plugin.text, 0, 0);
             }
