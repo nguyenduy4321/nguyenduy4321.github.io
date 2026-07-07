@@ -232,8 +232,10 @@ async function init() {
         const ctx = render.context;
         ctx.font = `bold ${FONT_SIZE}px "Segoe UI", sans-serif`;
         
-        const width = ctx.measureText(repo.name).width + 10; 
-        const height = FONT_SIZE * 1.5; 
+        const paddingX = FONT_SIZE * 0.8;
+        const paddingY = FONT_SIZE * 1.2;
+        const width = ctx.measureText(repo.name).width + paddingX; 
+        const height = paddingY; 
         
         const x = Math.random() * (window.innerWidth - width) + width / 2;
         const y = -100; 
@@ -242,6 +244,7 @@ async function init() {
             restitution: 0.2, 
             friction: 0.8,    
             frictionAir: 0.02, 
+            chamfer: { radius: height * 0.4 }, // Bo tròn góc để tránh các chữ bị kẹt góc tạo ra khoảng trống ảo
             render: { fillStyle: 'transparent', strokeStyle: 'transparent', lineWidth: 0 }
         };
 
