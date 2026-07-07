@@ -15,11 +15,17 @@ async function init() {
     try {
         const response = await fetch('https://api.github.com/users/nguyenduy4321/repos');
         const data = await response.json();
-        repos = data.map(repo => ({ 
-            name: repo.name, 
-            url: repo.html_url,
-            description: repo.description || 'Dự án này chưa có mô tả (No description available)'
-        }));
+        repos = data.map(repo => {
+            let desc = repo.description || 'Dự án này chưa có mô tả (No description available)';
+            if (repo.name === 'nguyenduy4321.github.io') {
+                desc = 'Trang Portfolio cá nhân ứng dụng Vật lý 2D, hiệu ứng Cinematic Space Theme siêu thực, được tối ưu hoàn hảo cho cả Mobile & Desktop! Chạm đúp để khám phá! 🚀🎉';
+            }
+            return { 
+                name: repo.name, 
+                url: repo.html_url,
+                description: desc
+            };
+        });
     } catch (e) {
         console.error("Lỗi khi tải repos", e);
         repos = [{name: 'Lỗi tải dữ liệu', url: '#', description: 'Có lỗi xảy ra khi gọi API.'}];
