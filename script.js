@@ -84,6 +84,21 @@ async function init() {
         Matter.Body.setPosition(rightWall, { x: window.innerWidth + 50, y: window.innerHeight });
     });
 
+    let lastTapTime = 0;
+    render.canvas.addEventListener('pointerdown', (e) => {
+        const currentTime = Date.now();
+        const tapLength = currentTime - lastTapTime;
+        if (tapLength < 400 && tapLength > 0) {
+            // Double click / Double tap
+            const mousePosition = mouse.position;
+            const hovered = Query.point(bodiesWithText, mousePosition);
+            if (hovered.length > 0) {
+                window.open(hovered[0].plugin.url, '_blank');
+            }
+        }
+        lastTapTime = currentTime;
+    });
+
     let bodiesWithText = [];
     let currentHoveredBody = null;
     let repoIndex = 0; 
@@ -444,7 +459,7 @@ async function init() {
             // Vẽ đè lớp Glow (tàng hình dần theo glowOpacity)
             if (glowOpacity > 0) {
                 ctx.shadowColor = `hsla(${currentHue}, 100%, 60%, ${glowOpacity})`;
-                ctx.shadowBlur = 25 * glowOpacity;
+                ctx.shadowBlur = (isMobile ? 40 : 25) * glowOpacity;
                 ctx.fillStyle = `rgba(255, 255, 255, ${glowOpacity})`;
                 ctx.fillText(body.plugin.text, 0, 0);
             }
